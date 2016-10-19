@@ -1,13 +1,13 @@
 var size;
-//1:地面　2:ブロック　3:プレイヤ　4:ゾンビ 5:こうもり
+//1:地面　2:UI　3:プレイヤ　4:ゾンビ 5:こうもり 6:スライム
 var level = [
-   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 5, 0, 0],
-   [0, 0, 0, 0, 0, 0, 0, 2, 2, 2],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-   [0, 0, 0, 2, 2, 2, 0, 0, 0, 0],
-   [0, 0, 0, 0, 3, 0, 0, 0, 4, 0],
-   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 3, 0, 0, 6, 4, 0],
+   [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 ];
 var tileSize = 96;
 var playerPosition; //マップ内のプレイやの位置(ｘ、ｙ)を保持する
@@ -60,13 +60,13 @@ var levelLayer = cc.Layer.extend({
             switch (level[i][j]) {
                case 1:
                   var groundSprite = cc.Sprite.create(res.ground_png);
-                  groundSprite.setPosition(tileSize / 2 + tileSize * j, 96 * (7 - i) - tileSize / 2);
+                  groundSprite.setPosition(tileSize / 2 + tileSize * j, 96 * (8 - i) - tileSize / 1.5);
                   this.addChild(groundSprite);
                   break;
                case 2:
-                  var blockSprite = cc.Sprite.create(res.block_png);
-                  blockSprite.setPosition(tileSize / 2 + tileSize * j, 96 * (7 - i) - tileSize / 2);
-                  this.addChild(blockSprite);
+                  var uiSprite = cc.Sprite.create(res.ui_panel_png);
+                  uiSprite.setPosition(tileSize / 1 + tileSize * j, 96 * (7.8 - i) - tileSize / 2);
+                  this.addChild(uiSprite);
                   break;
             }
          }
@@ -178,13 +178,17 @@ var Player = cc.Sprite.extend({
       // スプライトフレームを取得 player01,player02はplistの中で定義されいいる
       var frame1 = cc.spriteFrameCache.getSpriteFrame("player01");
       var frame2 = cc.spriteFrameCache.getSpriteFrame("player02");
+      var frame3 = cc.spriteFrameCache.getSpriteFrame("player03");
+      var frame4 = cc.spriteFrameCache.getSpriteFrame("player04");
 
       //スプライトフレームを配列に登録
       var animationframe = [];
       animationframe.push(frame1);
       animationframe.push(frame2);
+      animationframe.push(frame3);
+      animationframe.push(frame4);
       //スプライトフレームの配列を連続再生するアニメーションの定義
-      var animation = new cc.Animation(animationframe, 0.08);
+      var animation = new cc.Animation(animationframe, 0.2);
       //永久ループのアクションを定義
       var action = new cc.RepeatForever(new cc.animate(animation));
       //実行
