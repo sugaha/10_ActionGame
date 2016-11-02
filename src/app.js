@@ -14,8 +14,11 @@ var playerPosition; //マップ内のプレイやの位置(ｘ、ｙ)を保持�
 var playerSprite; //プレイヤーのスプライト
 var leftBtn; //左ボタン
 var rightBtn; //右ボタン
+var kenBtn;//剣ボタン
 var jumpBtn; //ジャンプ
 var winSize;
+var work_action;
+var atack_action;
 
 var gameScene = cc.Scene.extend({
    onEnter: function() {
@@ -47,6 +50,17 @@ var backgroundLayer = cc.Layer.extend({
       backgroundSprite.setPosition(winSize.width / 2, winSize.height / 2);
       //背景画像を画面の大きさに合わせるためのScaling処理
       backgroundSprite.setScale(winSize.width / size.width, winSize.height / size.height);
+
+      var left = cc.Sprite.create(res.curtain_left);
+      left.setPosition(size.width / 9, size.height /1.7);
+      left.setScale(1.16);
+      this.addChild(left, 0);
+
+      var right = cc.Sprite.create(res.curtain_right);
+      right.setPosition(size.width / 1.56, size.height /1.7);
+      right.setScale(1.16);
+      this.addChild(right, 0);
+
    }
 
 });
@@ -96,6 +110,13 @@ var playerLayer = cc.Layer.extend({
       rightBtn.setOpacity(128);
       rightBtn.setTag(2);
 
+      //剣ボタン
+      kenBtn = cc.Sprite.create(res.kenbutton_png);
+      this.addChild(kenBtn, 0);
+      kenBtn.setPosition(winSize.width - 160, 40);
+      kenBtn.setOpacity(128);
+      kenBtn.setTag(4);
+
       //ジャンプボタン
       jumpBtn = cc.Sprite.create(res.rightbutton_png);
       jumpBtn.setRotation(-90);
@@ -107,6 +128,7 @@ var playerLayer = cc.Layer.extend({
 
       cc.eventManager.addListener(listener, leftBtn);
       cc.eventManager.addListener(listener.clone(), rightBtn);
+      cc.eventManager.addListener(listener.clone(), kenBtn);
       cc.eventManager.addListener(listener.clone(), jumpBtn);
 
       cc.eventManager.addListener(keylistener, this);
@@ -122,6 +144,7 @@ var Player = cc.Sprite.extend({
       this.workingFlag = false;
       this.xSpeed = 0;
       this.ySpeed = 0;
+      this.atackFlag = false;
       this.jumpFlag = false;
       for (i = 0; i < 7; i++) {　　　　　　
          for (j = 0; j < 10; j++) {
@@ -174,6 +197,7 @@ var Player = cc.Sprite.extend({
 
       // スプライトシートをキャッシュに登録
       cc.spriteFrameCache.addSpriteFrames(res.player_plist, res.player_sheet);
+      this.initWithFile(res.player_sheet);
 
       // スプライトフレームを取得 player01,player02はplistの中で定義されいいる
       var frame1 = cc.spriteFrameCache.getSpriteFrame("player01");
@@ -181,19 +205,50 @@ var Player = cc.Sprite.extend({
       var frame3 = cc.spriteFrameCache.getSpriteFrame("player03");
       var frame4 = cc.spriteFrameCache.getSpriteFrame("player04");
 
+      var frame5 = cc.spriteFrameCache.getSpriteFrame("player05");
+      var frame6 = cc.spriteFrameCache.getSpriteFrame("player06");
+      var frame7 = cc.spriteFrameCache.getSpriteFrame("player07");
+
       //スプライトフレームを配列に登録
-      var animationframe = [];
-      animationframe.push(frame1);
-      animationframe.push(frame2);
-      animationframe.push(frame3);
-      animationframe.push(frame4);
+      var work_animationframe = [];
+      work_animationframe.push(frame1);
+      work_animationframe.push(frame2);
+      work_animationframe.push(frame3);
+      work_animationframe.push(frame4);
+
+      //スプライトフレーム（攻撃）を配列に登録
+      var atack_animationframe = [];
+      atack_animationframe.push(frame5);
+      atack_animationframe.push(frame6);
+      atack_animationframe.push(frame7);
+
       //スプライトフレームの配列を連続再生するアニメーションの定義
-      var animation = new cc.Animation(animationframe, 0.2);
+      var work_animation = new cc.Animation(work_animationframe, 0.2);
+
+      //スプライトフレームの配列を連続再生するアニメーションの定義
+      var atack_animation = new cc.Animation(atack_animationframe, 0.2);
+      atack_action = new cc.RepeatForever(new cc.animate(atack_animation));
+      //atack_player = this.atack_action;
+
       //永久ループのアクションを定義
-      var action = new cc.RepeatForever(new cc.animate(animation));
+      work_action = new cc.RepeatForever(new cc.animate(work_animation));
+      work_player = this.work_action;
+      this.runAction(work_action);
+
+      this.runAction(atack_action);
+      this.stopAction(atack_action);
+      //永久ループのアクションを定義
+      //var atackact = new cc.RepeatForever(new cc.animate(atackani));
+
       //実行
+
+
+      /*//攻撃実行
+      if(this.atackFlag == true){
       this.initWithFile(res.player_sheet);
-      this.runAction(action);
+      this.runAction(atackact);
+
+    }*/
 
       this.scheduleUpdate();
    },
@@ -201,7 +256,7 @@ var Player = cc.Sprite.extend({
 
    //移動のため
    update: function(dt) {
-      console.log(this.jumpFlag, this.ySpeed);
+      console.log(this.jumpFlag,this.workingFlag, this.ySpeed);
 
       if (this.xSpeed > 0) { //スピードが正の値（右方向移動）
          //　向きを判定させる
@@ -220,6 +275,29 @@ var Player = cc.Sprite.extend({
       this.setPosition(this.getPosition().x + this.xSpeed, this.getPosition().y + this.ySpeed);
 
    }
+
+   //攻撃のため
+   /*update: function(dt) {
+      console.log(this.atackFlag, this.ySpeed);
+
+      if (this.xSpeed > 0) { //スピードが正の値（右方向移動）
+         //　向きを判定させる
+         this.setFlippedX(false);
+      }
+      if (this.xSpeed < 0) { //スピードが負の値（左方向移動）
+         this.setFlippedX(true);
+      }
+      //プレイヤーを攻撃させる処理　攻撃ボタンが押されてないときで、プレイヤが空中にある場合
+      if (this.jumpFlag == false) {
+         if (this.getPosition().y < tileSize * 1.6) this.ySpeed = 0;
+         else this.ySpeed = this.ySpeed - 0.5;
+
+      }
+      //位置を更新する
+      this.setPosition(this.getPosition().x + this.xSpeed, this.getPosition().y + this.ySpeed);
+
+   }*/
+
 
 });
 
@@ -241,32 +319,49 @@ var listener = cc.EventListener.create({
          //タッチしたスプライトが左ボタンだったら
          if (target.getTag()　 == 1) {
             player.xSpeed = -2.5;
+            player.workingFlag = true;
             leftBtn.setOpacity(255);
             rightBtn.setOpacity(128);
          } else {
             //タッチしたスプライトが右ボタンだったら
             if (target.getTag()　 == 2) {
                player.xSpeed = 2.5;
+               player.workingFlag = true;
                rightBtn.setOpacity(255);
                leftBtn.setOpacity(128);
             }
          }
+
          //タッチしたスプライトがジャンプボタンだったら
          if (target.getTag()　 == 3) {
             if (player.jumpFlag == false && player.ySpeed == 0) player.ySpeed = 9;
             player.jumpFlag = true;
             jumpBtn.setOpacity(255);
          }
+         //タッチしたスプライトが剣ボタンだったら
+         if (target.getTag()　 == 4) {
+            if (player.atackFlag == false && player.ySpeed == 0) //player.ySpeed = 9;
+            player.atackFlag = true;
+            kenBtn.setOpacity(255);
+
+            player.stopAction(work_player);
+            player.runAction(player.atack_animation);
+
+
+          }
       }
       return true;
    },
    //タッチを止めたときは、移動スピードを0にする
    onTouchEnded: function(touch, event) {
+      player.workingFlag = false;
       player.jumpFlag = false;
+      player.atackFlag = false;
       player.xSpeed = 0;
       //player.ySpeed = 0;
       leftBtn.setOpacity(128);
       rightBtn.setOpacity(128);
+      kenBtn.setOpacity(128);
       jumpBtn.setOpacity(128);
    }
 
@@ -282,13 +377,32 @@ var keylistener = cc.EventListener.create({
          player.xSpeed = -2.5;
          leftBtn.setOpacity(255);
          rightBtn.setOpacity(128);
+
+         player.stopAction(atack_action);
+         player.stopAction(work_action);
+         player.runAction(work_action);
       }
-      if (keyCode == 68) { // d-Keyで左に移動
+      if (keyCode == 68) { // d-Keyで右に移動
          player.xSpeed = 2.5;
          rightBtn.setOpacity(255);
          leftBtn.setOpacity(128);
+
+         player.stopAction(atack_action);
+         player.stopAction(work_action);
+         player.runAction(work_action);
+
       }
-      if (keyCode == 32 || keycode == 38) { // スペースキーか上矢印キーでジャンプ
+      if (keyCode == 87) { // w-Keyで攻撃
+        if (player.atackFlag == false && player.ySpeed == 0)
+        player.atackFlag = true;
+        kenBtn.setOpacity(255);
+
+        player.stopAction(work_action);
+        player.stopAction(atack_action);
+        player.runAction(atack_action);
+
+      }
+      if (keyCode == 32 ) { // スペースキーか上矢印キーでジャンプ
          if (player.jumpFlag == false && player.ySpeed == 0) player.ySpeed = 9;
          player.jumpFlag = true;
          jumpBtn.setOpacity(255);
@@ -296,11 +410,13 @@ var keylistener = cc.EventListener.create({
       return true;
    },
    onKeyReleased: function(keyCode, event) {
+      player.atackFlag= false;
       player.jumpFlag = false;
       player.xSpeed = 0;
       //player.ySpeed = 0;
       leftBtn.setOpacity(128);
       rightBtn.setOpacity(128);
+      kenBtn.setOpacity(128);
       jumpBtn.setOpacity(128);
    },
 

@@ -4,10 +4,10 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>player01</key>
+            <key>Spark01</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,390},{186,116}}</string>
+                <string>{{0,390},{176,116}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -16,7 +16,7 @@
                 <string>{96,96}</string>
             </dict>
 
-            <key>player02</key>
+            <key>spark02</key>
             <dict>
                 <key>frame</key>
                 <string>{{235,390},{105,116}}</string>
@@ -28,7 +28,7 @@
                 <string>{96,96}</string>
             </dict>
 
-                <key>player03</key>
+                <key>spark03</key>
                 <dict>
                     <key>frame</key>
                     <string>{{423,390},{126,116}}</string>
@@ -40,7 +40,7 @@
                     <string>{96,96}</string>
                 </dict>
 
-                <key>player04</key>
+                <key>spark04</key>
                 <dict>
                     <key>frame</key>
                     <string>{{623,390},{105,116}}</string>
@@ -52,10 +52,10 @@
                     <string>{96,96}</string>
                 </dict>
 
-                <key>player05</key>
+                <key>spark05</key>
                 <dict>
                     <key>frame</key>
-                    <string>{{0,260},{176,116}}</string>
+                    <string>{{95,492},{105,116}}</string>
                     <key>offset</key>
                     <string>{0,0}</string>
                     <key>rotated</key>
@@ -64,10 +64,10 @@
                     <string>{96,96}</string>
                 </dict>
 
-                <key>player06</key>
+                <key>spark06</key>
                 <dict>
                     <key>frame</key>
-                    <string>{{200,260},{176,116}}</string>
+                    <string>{{623,390},{105,116}}</string>
                     <key>offset</key>
                     <string>{0,0}</string>
                     <key>rotated</key>
@@ -76,10 +76,10 @@
                     <string>{96,96}</string>
                 </dict>
 
-                <key>player07</key>
+                <key>spark07</key>
                 <dict>
                     <key>frame</key>
-                    <string>{{400,260},{176,116}}</string>
+                    <string>{{623,390},{105,116}}</string>
                     <key>offset</key>
                     <string>{0,0}</string>
                     <key>rotated</key>
