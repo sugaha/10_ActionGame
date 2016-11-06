@@ -9,8 +9,8 @@ var MyLayer = cc.Layer.extend({
         audioEngine = cc.audioEngine;
         //bgm再生
         if (!audioEngine.isMusicPlaying()) {
-          //audioEngine.playMusic("res/bgm_main.mp3", true);
-          //audioEngine.playMusic(res.umi_mp3, true);
+          //audioEngine.playMusic("res/title_bgm", true);
+          audioEngine.playMusic(res.title_bgm, true);
         }
 
                 var TitleBG =
@@ -38,6 +38,7 @@ var MyLayer = cc.Layer.extend({
                 logo.setPosition(size.width / 2, size.height /4);
                 logo.setScale(1.16);
                 this.addChild(logo, 0);
+
 /*
                 var Ready = cc.Sprite.create(res.ready_png);
                 Ready.setPosition(size.width / 2.1, size.height /3.3);
@@ -83,11 +84,15 @@ this.scheduleUpdate();
         // タップイベントリスナーを登録する
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            event: cc.EventListener.KEYBOARD,
             swallowTouches: true,
             onTouchBegan: this.onTouchBegan,
             onTouchMoved: this.onTouchMoved,
-            onTouchEnded: this.onTouchEnded
+            onTouchEnded: this.onTouchEnded,
+            onKeyPressed: this.onKeyPressed,
+            onKeyReleased:this.onKeyReleased
         }, this);
+        //cc.eventManager.addListener(keylistener, this);
 
         return true;
     },
@@ -99,8 +104,32 @@ this.scheduleUpdate();
     onTouchEnded: function(touch, event) {
         // 次のシーンに切り替える
         cc.director.runScene(new gameScene());
+        audioEngine.playEffect(res.kettei);
+        if (audioEngine.isMusicPlaying()) {
+                audioEngine.stopMusic();
+              }
     },
+
+     onKeyPressed: function(keyCode, event) {
+
+          if (keyCode == 13) { // enter-Keyで左に移動
+             //cc.director.runScene(new gameScene());
+             //console.log("a");
+             audioEngine.playEffect(res.kettei);
+          }
+        return true;
+       },
+
+       onKeyReleased: function(keyCode, event) {
+        cc.director.runScene(new gameScene());
+        //audioEngine.playEffect(res.kettei);
+        if (audioEngine.isMusicPlaying()) {
+                audioEngine.stopMusic();
+              }
+       },
+
 });
+
 
 var MyScene = cc.Scene.extend({
     onEnter: function() {

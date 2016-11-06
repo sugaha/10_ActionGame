@@ -2,12 +2,12 @@ var size;
 //1:地面　2:UI　3:プレイヤ　4:ゾンビ 5:こうもり 6:スライム
 var level = [
    [0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
-   [0, 0, 0, 0, 0, 0, 0, 5, 0, 0],
+   [0, 0, 5, 0, 0, 0, 0, 5, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+   [0, 0, 1, 1, 0, 0, 0, 1, 0, 0],
    [0, 0, 0, 0, 3, 0, 0, 6, 4, 0],
-   [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 var tileSize = 96;
 var playerPosition; //マップ内のプレイやの位置(ｘ、ｙ)を保持する
@@ -19,6 +19,8 @@ var jumpBtn; //ジャンプ
 var winSize;
 var work_action;
 var atack_action;
+var jump_action;
+var key_seigyo = false;
 
 var gameScene = cc.Scene.extend({
    onEnter: function() {
@@ -34,6 +36,10 @@ var gameScene = cc.Scene.extend({
       this.addChild(player);
       var enemys = new enemyLayer();
       this.addChild(enemys);
+      if (!audioEngine.isMusicPlaying()) {
+      //audioEngine.playMusic("res/bgm_main.mp3", true);
+      audioEngine.playMusic(res.main_bgm, true);
+    }
    }
 });
 
@@ -51,15 +57,66 @@ var backgroundLayer = cc.Layer.extend({
       //背景画像を画面の大きさに合わせるためのScaling処理
       backgroundSprite.setScale(winSize.width / size.width, winSize.height / size.height);
 
+
+      var groundSprite = cc.Sprite.create(res.ground_png);
+      var size = backgroundSprite.getContentSize();
+      //console.log(size);
+      this.addChild(groundSprite);
+      //console.log(winSize.width,winSize.height);
+      groundSprite.setPosition(winSize.width / 2.5, winSize.height / 4.5);
+      //背景画像を画面の大きさに合わせるためのScaling処理
+      groundSprite.setScale(1.1);
+
+
       var left = cc.Sprite.create(res.curtain_left);
-      left.setPosition(size.width / 9, size.height /1.7);
+      left.setPosition(size.width / 12, size.height /1.7);
       left.setScale(1.16);
       this.addChild(left, 0);
 
       var right = cc.Sprite.create(res.curtain_right);
-      right.setPosition(size.width / 1.56, size.height /1.7);
+      right.setPosition(size.width / 1.5, size.height /1.7);
       right.setScale(1.16);
       this.addChild(right, 0);
+
+      var shouhi = cc.Sprite.create(res.syouhi);
+      shouhi.setPosition(size.width / 2.5, size.height /0.97);
+      shouhi.setScale(1);
+      this.addChild(shouhi, 0);
+
+      var shouhi2 = cc.Sprite.create(res.syouhi);
+      shouhi2.setPosition(size.width / 7, size.height /0.97);
+      shouhi2.setScale(1);
+      this.addChild(shouhi2, 0);
+
+      var Hp = cc.Sprite.create(res.hitpoint);
+      Hp.setPosition(size.width / 10.5, size.height /0.97);
+      Hp.setScale(1);
+      this.addChild(Hp, 0);
+
+      var Hp2 = cc.Sprite.create(res.hitpoint);
+      Hp2.setPosition(size.width / 7, size.height /0.97);
+      Hp2.setScale(1);
+      this.addChild(Hp2, 0);
+
+      var Hp3 = cc.Sprite.create(res.hitpoint);
+      Hp3.setPosition(size.width / 5.5, size.height /0.97);
+      Hp3.setScale(1);
+      this.addChild(Hp3, 0);
+
+      var waza = cc.Sprite.create(res.bear);
+      waza.setPosition(size.width / 2.9, size.height /0.97);
+      waza.setScale(1);
+      this.addChild(waza, 0);
+
+      var waza2 = cc.Sprite.create(res.bear);
+      waza2.setPosition(size.width / 2.6, size.height /0.97);
+      waza2.setScale(1);
+      this.addChild(waza2, 0);
+
+      var waza3 = cc.Sprite.create(res.bear);
+      waza3.setPosition(size.width / 2.3, size.height /0.97);
+      waza3.setScale(1);
+      this.addChild(waza3, 0);
 
    }
 
@@ -73,7 +130,7 @@ var levelLayer = cc.Layer.extend({
          for (j = 0; j < 10; j++) {
             switch (level[i][j]) {
                case 1:
-                  var groundSprite = cc.Sprite.create(res.ground_png);
+                  var groundSprite = cc.Sprite.create(res.block_png);
                   groundSprite.setPosition(tileSize / 2 + tileSize * j, 96 * (8 - i) - tileSize / 1.5);
                   this.addChild(groundSprite);
                   break;
@@ -209,6 +266,12 @@ var Player = cc.Sprite.extend({
       var frame6 = cc.spriteFrameCache.getSpriteFrame("player06");
       var frame7 = cc.spriteFrameCache.getSpriteFrame("player07");
 
+      var frame8 = cc.spriteFrameCache.getSpriteFrame("player08");
+      var frame9 = cc.spriteFrameCache.getSpriteFrame("player09");
+      var frame10 = cc.spriteFrameCache.getSpriteFrame("player10");
+      var frame11 = cc.spriteFrameCache.getSpriteFrame("player11");
+
+
       //スプライトフレームを配列に登録
       var work_animationframe = [];
       work_animationframe.push(frame1);
@@ -222,6 +285,13 @@ var Player = cc.Sprite.extend({
       atack_animationframe.push(frame6);
       atack_animationframe.push(frame7);
 
+      //スプライトフレーム（攻撃）を配列に登録
+      var jump_animationframe = [];
+      jump_animationframe.push(frame8);
+      jump_animationframe.push(frame9);
+      jump_animationframe.push(frame10);
+      jump_animationframe.push(frame11);
+
       //スプライトフレームの配列を連続再生するアニメーションの定義
       var work_animation = new cc.Animation(work_animationframe, 0.2);
 
@@ -230,6 +300,10 @@ var Player = cc.Sprite.extend({
       atack_action = new cc.RepeatForever(new cc.animate(atack_animation));
       //atack_player = this.atack_action;
 
+      //スプライトフレームの配列を連続再生するアニメーションの定義
+      var jump_animation = new cc.Animation(jump_animationframe, 0.4);
+      jump_action = new cc.RepeatForever(new cc.animate(jump_animation));
+
       //永久ループのアクションを定義
       work_action = new cc.RepeatForever(new cc.animate(work_animation));
       work_player = this.work_action;
@@ -237,6 +311,9 @@ var Player = cc.Sprite.extend({
 
       this.runAction(atack_action);
       this.stopAction(atack_action);
+
+      this.runAction(jump_action);
+      this.stopAction(jump_action);
       //永久ループのアクションを定義
       //var atackact = new cc.RepeatForever(new cc.animate(atackani));
 
@@ -273,7 +350,10 @@ var Player = cc.Sprite.extend({
       }
       //位置を更新する
       this.setPosition(this.getPosition().x + this.xSpeed, this.getPosition().y + this.ySpeed);
-
+      //衝突判定
+      //var playerRect = this.player.getBoundingBox();
+      //敵と衝突しているか
+      //for(var i = 0; i < this.)
    }
 
    //攻撃のため
@@ -308,6 +388,7 @@ var listener = cc.EventListener.create({
    // swallowTouches: true,
 
    onTouchBegan: function(touch, event) {
+     key_seigyo = true;
       var target = event.getCurrentTarget();
       var location = target.convertToNodeSpace(touch.getLocation());
       var spriteSize = target.getContentSize();
@@ -322,6 +403,11 @@ var listener = cc.EventListener.create({
             player.workingFlag = true;
             leftBtn.setOpacity(255);
             rightBtn.setOpacity(128);
+
+            player.stopAction(atack_action);
+            player.stopAction(jump_action);
+            player.stopAction(work_action);
+            player.runAction(work_action);
          } else {
             //タッチしたスプライトが右ボタンだったら
             if (target.getTag()　 == 2) {
@@ -329,6 +415,11 @@ var listener = cc.EventListener.create({
                player.workingFlag = true;
                rightBtn.setOpacity(255);
                leftBtn.setOpacity(128);
+
+               player.stopAction(atack_action);
+               player.stopAction(jump_action);
+               player.stopAction(work_action);
+               player.runAction(work_action);
             }
          }
 
@@ -337,6 +428,10 @@ var listener = cc.EventListener.create({
             if (player.jumpFlag == false && player.ySpeed == 0) player.ySpeed = 9;
             player.jumpFlag = true;
             jumpBtn.setOpacity(255);
+            player.stopAction(work_action);
+            player.stopAction(atack_action);
+            player.stopAction(jump_action);
+            player.runAction(jump_action);
          }
          //タッチしたスプライトが剣ボタンだったら
          if (target.getTag()　 == 4) {
@@ -344,9 +439,11 @@ var listener = cc.EventListener.create({
             player.atackFlag = true;
             kenBtn.setOpacity(255);
 
-            player.stopAction(work_player);
-            player.runAction(player.atack_animation);
-
+            player.stopAction(work_action);
+            player.stopAction(jump_action);
+            player.stopAction(atack_action);
+            player.runAction(atack_action);
+            audioEngine.playEffect(res.ken_mp3);
 
           }
       }
@@ -373,12 +470,14 @@ var keylistener = cc.EventListener.create({
    // swallowTouches: true,
 
    onKeyPressed: function(keyCode, event) {
+     if(key_seigyo == false){
       if (keyCode == 65) { // a-Keyで左に移動
          player.xSpeed = -2.5;
          leftBtn.setOpacity(255);
          rightBtn.setOpacity(128);
 
          player.stopAction(atack_action);
+         player.stopAction(jump_action);
          player.stopAction(work_action);
          player.runAction(work_action);
       }
@@ -388,6 +487,7 @@ var keylistener = cc.EventListener.create({
          leftBtn.setOpacity(128);
 
          player.stopAction(atack_action);
+         player.stopAction(jump_action);
          player.stopAction(work_action);
          player.runAction(work_action);
 
@@ -398,20 +498,31 @@ var keylistener = cc.EventListener.create({
         kenBtn.setOpacity(255);
 
         player.stopAction(work_action);
+        player.stopAction(jump_action);
         player.stopAction(atack_action);
         player.runAction(atack_action);
+
+        audioEngine.playEffect(res.ken_mp3);
 
       }
       if (keyCode == 32 ) { // スペースキーか上矢印キーでジャンプ
          if (player.jumpFlag == false && player.ySpeed == 0) player.ySpeed = 9;
          player.jumpFlag = true;
          jumpBtn.setOpacity(255);
+
+         player.stopAction(work_action);
+         player.stopAction(atack_action);
+         player.stopAction(jump_action);
+         player.runAction(jump_action);
       }
       return true;
+    }
    },
+
    onKeyReleased: function(keyCode, event) {
       player.atackFlag= false;
       player.jumpFlag = false;
+      key_seigyo = false;
       player.xSpeed = 0;
       //player.ySpeed = 0;
       leftBtn.setOpacity(128);

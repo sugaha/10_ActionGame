@@ -16,6 +16,14 @@ var res = {
    curtain_left:"res/curtain_left.png",
    logo_png:"res/logo.png",
    sparkle_frames:"res/sparkle_frames.png",
+   block_png:"res/block48X48.png",
+   title_bgm:"res/title_bgm.mp3",
+   main_bgm:"res/main_bgm.mp3",
+   hitpoint:"res/hitpoint.png",
+   ken_mp3:"res/ken.mp3",
+   kettei:"res/kettei.mp3",
+   syouhi:"res/syouhi.png",
+   bear:"res/bear.png",
 
 };
 

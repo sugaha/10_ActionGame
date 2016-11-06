@@ -53,6 +53,13 @@ var EnemyBat = cc.Sprite.extend({
   update: function(dt) {
     this.FrameCount++;
     //4フレームに1回　こうもりの移動計算する
+    var playerBoundingBox = player.getBoundingBox();
+    var batBoundingBox = this.getBoundingBox();
+
+    if (cc.rectIntersectsRect(playerBoundingBox, batBoundingBox) && player.invulnerability == 0) {
+      console.log("当たり");
+    }
+
     if (this.FrameCount % 4 == 0) {
       //プレイヤーの位置をこうもりの位置の差を計算
       var offset_x = player.getPosition().x - this.getPosition().x;
