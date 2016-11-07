@@ -148,53 +148,7 @@
                         <string>{96,96}</string>
                     </dict>
 
-                    <key>slimer13</key>
-                    <dict>
-                        <key>frame</key>
-                        <string>{{0,200},{96,70}}</string>
-                        <key>offset</key>
-                        <string>{0,0}</string>
-                        <key>rotated</key>
-                        <false/>
-                        <key>sourceSize</key>
-                        <string>{96,96}</string>
-                    </dict>
 
-                    <key>slimer14</key>
-                    <dict>
-                        <key>frame</key>
-                        <string>{{130,200},{96,70}}</string>
-                        <key>offset</key>
-                        <string>{0,0}</string>
-                        <key>rotated</key>
-                        <false/>
-                        <key>sourceSize</key>
-                        <string>{96,96}</string>
-                    </dict>
-
-                    <key>slimer15</key>
-                    <dict>
-                        <key>frame</key>
-                        <string>{{255,200},{96,70}}</string>
-                        <key>offset</key>
-                        <string>{0,0}</string>
-                        <key>rotated</key>
-                        <false/>
-                        <key>sourceSize</key>
-                        <string>{96,96}</string>
-                    </dict>
-
-                    <key>slimer16</key>
-                    <dict>
-                        <key>frame</key>
-                        <string>{{385,200},{120,70}}</string>
-                        <key>offset</key>
-                        <string>{0,0}</string>
-                        <key>rotated</key>
-                        <false/>
-                        <key>sourceSize</key>
-                        <string>{96,96}</string>
-                    </dict>
 
 
         </dict>

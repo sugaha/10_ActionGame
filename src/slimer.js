@@ -21,7 +21,7 @@ var slimer = cc.Sprite.extend({
 
       for (i = 0; i < 7; i++) {　　　　　　
          for (j = 0; j < 10; j++) {
-            if (level[i][j] == 6) {
+            if (level[i][j] == 7) {
                this.setPosition(tileSize / 2 + tileSize * j, 96 * (7 - i) - tileSize / 2);
                slimerPosition = {
                   x: j,
@@ -47,11 +47,7 @@ var slimer = cc.Sprite.extend({
       var frame10 = cc.spriteFrameCache.getSpriteFrame("slimer10");
       var frame11 = cc.spriteFrameCache.getSpriteFrame("slimer11");
       var frame12 = cc.spriteFrameCache.getSpriteFrame("slimer12");
-      var frame13 = cc.spriteFrameCache.getSpriteFrame("slimer13");
-      var frame14 = cc.spriteFrameCache.getSpriteFrame("slimer14");
-      var frame15 = cc.spriteFrameCache.getSpriteFrame("slimer15");
-      var frame16 = cc.spriteFrameCache.getSpriteFrame("slimer16");
-
+  
 
       //スプライトフレームを配列に登録
       var animationframe = [];
@@ -67,10 +63,7 @@ var slimer = cc.Sprite.extend({
       animationframe.push(frame10);
       animationframe.push(frame11);
       animationframe.push(frame12);
-      animationframe.push(frame13);
-      animationframe.push(frame14);
-      animationframe.push(frame15);
-      animationframe.push(frame16);
+
 
       //スプライトフレームの配列を連続再生するアニメーションの定義
       var animation = new cc.Animation(animationframe, 0.2);

@@ -1,12 +1,12 @@
 var size;
-//1:地面　2:UI　3:プレイヤ　4:ゾンビ 5:こうもり 6:スライム
+//1:地面　2:UI　3:プレイヤ　4:ゾンビ 5:こうもり 6:スライム 7赤
 var level = [
    [0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
    [0, 0, 5, 0, 0, 0, 0, 5, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    [0, 0, 1, 1, 0, 0, 0, 1, 0, 0],
-   [0, 0, 0, 0, 3, 6, 0, 4, 0, 0],
+   [0, 0, 7, 0, 3, 6, 0, 4, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 var tileSize = 96;
@@ -40,6 +40,8 @@ var gameScene = cc.Scene.extend({
       this.addChild(zombie);
       var slimeg = new slimegLayer();
       this.addChild(slimeg);
+      var slimer = new slimerLayer();
+      this.addChild(slimer);
       if (!audioEngine.isMusicPlaying()) {
       //audioEngine.playMusic("res/bgm_main.mp3", true);
       audioEngine.playMusic(res.main_bgm, true);
