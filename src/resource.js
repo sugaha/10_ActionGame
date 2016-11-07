@@ -29,8 +29,7 @@ var res = {
    syouhi:"res/syouhi.png",
    bear:"res/bear.png",
    light:"res/background_light_shafts.png",
-   btn:"res/btn_play.png",
-
+   
 };
 
 var g_resources = [];
