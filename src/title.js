@@ -19,6 +19,12 @@ var MyLayer = cc.Layer.extend({
                 TitleBG.setScale(1);
                 this.addChild(TitleBG, 0);
 
+                var light = cc.Sprite.create(res.light);
+                light.setPosition(size.width / 2, size.height /2.3);
+                light.setScale(1.16);
+                this.addChild(light, 0);
+
+
                 var Title = cc.Sprite.create(res.title_png);
                 Title.setPosition(size.width / 2, size.height /1.4);
                 Title.setScale(0.8);

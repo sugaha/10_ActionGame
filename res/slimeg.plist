@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>slimeg01</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,0},{96,70}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceSize</key>
+                <string>{96,96}</string>
+            </dict>
+
+            <key>slimeg02</key>
+            <dict>
+                <key>frame</key>
+                <string>{{120,0},{96,70}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceSize</key>
+                <string>{96,96}</string>
+            </dict>
+
+                <key>slimeg03</key>
+                <dict>
+                    <key>frame</key>
+                    <string>{{245,0},{96,70}}</string>
+                    <key>offset</key>
+                    <string>{0,0}</string>
+                    <key>rotated</key>
+                    <false/>
+                    <key>sourceSize</key>
+                    <string>{96,96}</string>
+                </dict>
+
+                <key>slimeg04</key>
+                <dict>
+                    <key>frame</key>
+                    <string>{{380,0},{96,70}}</string>
+                    <key>offset</key>
+                    <string>{0,0}</string>
+                    <key>rotated</key>
+                    <false/>
+                    <key>sourceSize</key>
+                    <string>{96,96}</string>
+                </dict>
+
+                <key>slimeg05</key>
+                <dict>
+                    <key>frame</key>
+                    <string>{{0,65},{96,70}}</string>
+                    <key>offset</key>
+                    <string>{0,0}</string>
+                    <key>rotated</key>
+                    <false/>
+                    <key>sourceSize</key>
+                    <string>{96,96}</string>
+                </dict>
+
+                <key>slimeg06</key>
+                <dict>
+                    <key>frame</key>
+                    <string>{{120,65},{96,70}}</string>
+                    <key>offset</key>
+                    <string>{0,0}</string>
+                    <key>rotated</key>
+                    <false/>
+                    <key>sourceSize</key>
+                    <string>{96,96}</string>
+                </dict>
+
+                <key>slimeg07</key>
+                <dict>
+                    <key>frame</key>
+                    <string>{{255,65},{96,70}}</string>
+                    <key>offset</key>
+                    <string>{0,0}</string>
+                    <key>rotated</key>
+                    <false/>
+                    <key>sourceSize</key>
+                    <string>{96,96}</string>
+                </dict>
+
+                <key>slimeg08</key>
+                <dict>
+                    <key>frame</key>
+                    <string>{{380,65},{120,70}}</string>
+                    <key>offset</key>
+                    <string>{0,0}</string>
+                    <key>rotated</key>
+                    <false/>
+                    <key>sourceSize</key>
+                    <string>{96,96}</string>
+                </dict>
+
+                <key>slimeg09</key>
+                <dict>
+                    <key>frame</key>
+                    <string>{{0,130},{96,70}}</string>
+                    <key>offset</key>
+                    <string>{0,0}</string>
+                    <key>rotated</key>
+                    <false/>
+                    <key>sourceSize</key>
+                    <string>{96,96}</string>
+                </dict>
+
+                <key>slimeg10</key>
+                <dict>
+                    <key>frame</key>
+                    <string>{{130,130},{96,70}}</string>
+                    <key>offset</key>
+                    <string>{0,0}</string>
+                    <key>rotated</key>
+                    <false/>
+                    <key>sourceSize</key>
+                    <string>{96,96}</string>
+                </dict>
+
+                    <key>slimeg11</key>
+                    <dict>
+                        <key>frame</key>
+                        <string>{{260,130},{96,70}}</string>
+                        <key>offset</key>
+                        <string>{0,0}</string>
+                        <key>rotated</key>
+                        <false/>
+                        <key>sourceSize</key>
+                        <string>{96,96}</string>
+                    </dict>
+
+                    <key>slimeg12</key>
+                    <dict>
+                        <key>frame</key>
+                        <string>{{390,130},{96,70}}</string>
+                        <key>offset</key>
+                        <string>{0,0}</string>
+                        <key>rotated</key>
+                        <false/>
+                        <key>sourceSize</key>
+                        <string>{96,96}</string>
+                    </dict>
+
+                    <key>slimeg13</key>
+                    <dict>
+                        <key>frame</key>
+                        <string>{{0,200},{96,70}}</string>
+                        <key>offset</key>
+                        <string>{0,0}</string>
+                        <key>rotated</key>
+                        <false/>
+                        <key>sourceSize</key>
+                        <string>{96,96}</string>
+                    </dict>
+
+                    <key>slimeg14</key>
+                    <dict>
+                        <key>frame</key>
+                        <string>{{130,200},{96,70}}</string>
+                        <key>offset</key>
+                        <string>{0,0}</string>
+                        <key>rotated</key>
+                        <false/>
+                        <key>sourceSize</key>
+                        <string>{96,96}</string>
+                    </dict>
+
+                    <key>slimeg15</key>
+                    <dict>
+                        <key>frame</key>
+                        <string>{{255,200},{96,70}}</string>
+                        <key>offset</key>
+                        <string>{0,0}</string>
+                        <key>rotated</key>
+                        <false/>
+                        <key>sourceSize</key>
+                        <string>{96,96}</string>
+                    </dict>
+
+                    <key>slimeg16</key>
+                    <dict>
+                        <key>frame</key>
+                        <string>{{385,200},{120,70}}</string>
+                        <key>offset</key>
+                        <string>{0,0}</string>
+                        <key>rotated</key>
+                        <false/>
+                        <key>sourceSize</key>
+                        <string>{96,96}</string>
+                    </dict>
+
+
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+        </dict>
+    </dict>
+</plist>

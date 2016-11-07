@@ -6,7 +6,7 @@ var level = [
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    [0, 0, 1, 1, 0, 0, 0, 1, 0, 0],
-   [0, 0, 0, 0, 3, 0, 0, 6, 4, 0],
+   [0, 0, 0, 0, 3, 6, 0, 4, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 var tileSize = 96;
@@ -36,6 +36,10 @@ var gameScene = cc.Scene.extend({
       this.addChild(player);
       var enemys = new enemyLayer();
       this.addChild(enemys);
+      var zombie = new zombieLayer();
+      this.addChild(zombie);
+      var slimeg = new slimegLayer();
+      this.addChild(slimeg);
       if (!audioEngine.isMusicPlaying()) {
       //audioEngine.playMusic("res/bgm_main.mp3", true);
       audioEngine.playMusic(res.main_bgm, true);
@@ -56,6 +60,11 @@ var backgroundLayer = cc.Layer.extend({
       backgroundSprite.setPosition(winSize.width / 2, winSize.height / 2);
       //背景画像を画面の大きさに合わせるためのScaling処理
       backgroundSprite.setScale(winSize.width / size.width, winSize.height / size.height);
+
+      var light = cc.Sprite.create(res.light);
+      light.setPosition(size.width / 2, size.height /1.5);
+      light.setScale(1.16);
+      this.addChild(light, 0);
 
 
       var groundSprite = cc.Sprite.create(res.ground_png);

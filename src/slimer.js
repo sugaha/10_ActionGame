@@ -1,10 +1,10 @@
-var slimeg;
+var slimer;
 
-var slimegLayer = cc.Layer.extend({
+var slimerLayer = cc.Layer.extend({
    ctor: function() {
       this._super();
-      slimeg = new Slimeg();
-      this.addChild(slimeg);
+      slimer = new slimer();
+      this.addChild(slimer);
 
 
    }
@@ -12,10 +12,10 @@ var slimegLayer = cc.Layer.extend({
 });
 
 
-var Slimeg = cc.Sprite.extend({
+var slimer = cc.Sprite.extend({
    ctor: function() {
       this._super();
-      this.initWithFile(res.slimeg_frames);
+      this.initWithFile(res.slimer_frames);
       this.velocity = cc.p(0,0);
       this.FrameCount = 0;
 
@@ -23,7 +23,7 @@ var Slimeg = cc.Sprite.extend({
          for (j = 0; j < 10; j++) {
             if (level[i][j] == 6) {
                this.setPosition(tileSize / 2 + tileSize * j, 96 * (7 - i) - tileSize / 2);
-               slimegPosition = {
+               slimerPosition = {
                   x: j,
                   y: i
                };
@@ -32,25 +32,25 @@ var Slimeg = cc.Sprite.extend({
       }
 
       // スプライトシートをキャッシュに登録
-      cc.spriteFrameCache.addSpriteFrames(res.slimeg_plist, res.slimeg_frames);
+      cc.spriteFrameCache.addSpriteFrames(res.slimer_plist, res.slimer_frames);
 
-      // スプライトフレームを取得 slimeg01,slimeg02はplistの中で定義されいいる
-      var frame1 = cc.spriteFrameCache.getSpriteFrame("slimeg01");
-      var frame2 = cc.spriteFrameCache.getSpriteFrame("slimeg02");
-      var frame3 = cc.spriteFrameCache.getSpriteFrame("slimeg03");
-      var frame4 = cc.spriteFrameCache.getSpriteFrame("slimeg04");
-      var frame5 = cc.spriteFrameCache.getSpriteFrame("slimeg05");
-      var frame6 = cc.spriteFrameCache.getSpriteFrame("slimeg06");
-      var frame7 = cc.spriteFrameCache.getSpriteFrame("slimeg07");
-      var frame8 = cc.spriteFrameCache.getSpriteFrame("slimeg08");
-      var frame9 = cc.spriteFrameCache.getSpriteFrame("slimeg09");
-      var frame10 = cc.spriteFrameCache.getSpriteFrame("slimeg10");
-      var frame11 = cc.spriteFrameCache.getSpriteFrame("slimeg11");
-      var frame12 = cc.spriteFrameCache.getSpriteFrame("slimeg12");
-      var frame13 = cc.spriteFrameCache.getSpriteFrame("slimeg13");
-      var frame14 = cc.spriteFrameCache.getSpriteFrame("slimeg14");
-      var frame15 = cc.spriteFrameCache.getSpriteFrame("slimeg15");
-      var frame16 = cc.spriteFrameCache.getSpriteFrame("slimeg16");
+      // スプライトフレームを取得 slimer01,slimer02はplistの中で定義されいいる
+      var frame1 = cc.spriteFrameCache.getSpriteFrame("slimer01");
+      var frame2 = cc.spriteFrameCache.getSpriteFrame("slimer02");
+      var frame3 = cc.spriteFrameCache.getSpriteFrame("slimer03");
+      var frame4 = cc.spriteFrameCache.getSpriteFrame("slimer04");
+      var frame5 = cc.spriteFrameCache.getSpriteFrame("slimer05");
+      var frame6 = cc.spriteFrameCache.getSpriteFrame("slimer06");
+      var frame7 = cc.spriteFrameCache.getSpriteFrame("slimer07");
+      var frame8 = cc.spriteFrameCache.getSpriteFrame("slimer08");
+      var frame9 = cc.spriteFrameCache.getSpriteFrame("slimer09");
+      var frame10 = cc.spriteFrameCache.getSpriteFrame("slimer10");
+      var frame11 = cc.spriteFrameCache.getSpriteFrame("slimer11");
+      var frame12 = cc.spriteFrameCache.getSpriteFrame("slimer12");
+      var frame13 = cc.spriteFrameCache.getSpriteFrame("slimer13");
+      var frame14 = cc.spriteFrameCache.getSpriteFrame("slimer14");
+      var frame15 = cc.spriteFrameCache.getSpriteFrame("slimer15");
+      var frame16 = cc.spriteFrameCache.getSpriteFrame("slimer16");
 
 
       //スプライトフレームを配列に登録
@@ -77,7 +77,7 @@ var Slimeg = cc.Sprite.extend({
       var action = new cc.RepeatForever(new cc.animate(animation));
 
 
-      this.initWithFile(res.slimeg_frames);
+      this.initWithFile(res.slimer_frames);
       this.runAction(action);
 
       this.scheduleUpdate();
@@ -89,8 +89,8 @@ var Slimeg = cc.Sprite.extend({
       this.FrameCount++;
       //ゾンビ移動計算　４フレーム中１
       if(this.FrameCount % 4　== 0){
-        var offset_x = slimeg.getPosition().x - this.getPosition().x;
-        var offset_y = slimeg.getPosition().y - this.getPosition().y;
+        var offset_x = slimer.getPosition().x - this.getPosition().x;
+        var offset_y = slimer.getPosition().y - this.getPosition().y;
       }
    }
 
